@@ -99,19 +99,19 @@ static inline void write_cmd(GDisplay *g, uint8_t index) {
 
 	spiStart(&SPID1, &hs_spicfg);
 	spiSelect(&SPID1);
-	spiStartSend(&SPID1, 1, &index);
+	spiSend(&SPID1, 1, &index);
 	spiUnselect(&SPID1);
 	spiStop(&SPID1);
 }
 
-static inline void write_data(GDisplay *g, uint8_t data, uint16_t length) {
+static inline void write_data(GDisplay *g, uint8_t * data, uint16_t length) {
 	(void) g;
 
 	palSetPad(PCD8544_PIN_PORT, PCD8544_PIN_DC);
 
 	spiStart(&SPID1, &hs_spicfg);
 	spiSelect(&SPID1);
-	spiStartSend(&SPID1, length, &data);
+	spiSend(&SPID1, length, &data);
 	spiUnselect(&SPID1);
 	spiStop(&SPID1);
 }
